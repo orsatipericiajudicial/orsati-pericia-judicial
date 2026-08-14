@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Visualizador Técnico de Boletins | Orsati</title>
+        <!-- Configuração do Favicon (Ícone da aba do navegador) -->
+    <link rel="icon" type="image/svg+xml" href="./Images/LogoFav.svg" sizes="32x32">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-light);
+        }
+
+        /* Estrutura de alinhamento do cabeçalho da visualização */
+        .viewer-header {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Alinhamento conjunto da marca institucional e das meta-informações */
+        .viewer-brand-box {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Dimensionamento e inversão cromática para o logotipo no cabeçalho escuro */
+        .viewer-logo {
+            max-height: 45px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Linha vertical divisória estrutural */
+        .viewer-divider {
+            width: 1px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .viewer-header h1 {
+            font-size: 1.2rem;
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        .btn-viewer-back {
+            background-color: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-viewer-back:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .pdf-container {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            max-width: 1100px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="viewer-header">
+        <div class="viewer-brand-box">
+            <img src="./Images/LogoEsc.png" alt="Orsati Perícia Judicial" class="viewer-logo">
+            <div class="viewer-divider"></div>
+            <div>
+                <h1>Orsati | Análise Técnica Pericial</h1>
+                <span id="ca-subtitle" style="font-size: 0.9rem; color: #fff; opacity: 0.8;">Boletim do Fabricante</span>
+            </div>
+        </div>
+        <!-- Encerramento da aba ativa e retorno ao hub principal -->
+        <a href="javascript:window.close();" class="btn-viewer-back">Fechar Visualização</a>
+    </div>
+
+    <div class="pdf-container">
+        <!-- Incorporação dinâmica do objeto PDF via Iframe nativo -->
+        <iframe id="pdf-frame" src="" type="application/pdf"></iframe>
+    </div>
+
+    <script>
+        // Mapeamento dos parâmetros da URL para carregamento dinâmico dos documentos
+        function carregarDocumento() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const arquivoPath = urlParams.get('file');
+            const numeroCA = urlParams.get('ca');
+
+            if (arquivoPath) {
+                document.getElementById('pdf-frame').src = arquivoPath;
+            }
+            if (numeroCA) {
+                document.getElementById('ca-subtitle').innerText = "Documentação Técnica Oficial - CA: " + numeroCA;
+                document.title = "Boletim Técnico CA " + numeroCA + " | Orsati Perícia";
+            }
+        }
+        window.onload = carregarDocumento;
+    </script>
+
+</body>
+</html>

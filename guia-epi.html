@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central Técnica de EPIs | Orsati Perícia Judicial</title>
+<meta name="description" content="Consulta de Certificados de Aprovação (CA), boletins técnicos e critérios de vida útil de Equipamentos de Proteção Individual.">
+<link rel="icon" type="image/svg+xml" href="./images/LogoFav.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="progress" id="barraProgresso"></div>
+
+<header class="site-header" id="cabecalho">
+    <div class="brand">
+        <a href="index.html" aria-label="Orsati — página inicial">
+            <img class="brand__logo" src="./images/Orsati Logo pgn.png" alt="Orsati Perícia Judicial">
+        </a>
+        <div class="disclosure">
+            <button class="disclosure__trigger" type="button" aria-label="Abrir índice técnico" aria-haspopup="true">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="disclosure__panel">
+                <a href="index.html#areas-atuacao">Áreas de Atuação</a>
+                <a href="index.html#qualificacao-tecnica">Acervo Técnico &amp; Currículo</a>
+                <a href="index.html#equipamentos-tecnicos">Equipamentos &amp; Metrologia</a>
+                <a href="index.html#download-planilha-premium">Planilha de Gestão de EPIs</a>
+                <a href="bloco-tecnico.html">Bloco Técnico (Artigos)</a>
+                <hr class="disclosure__sep">
+                <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav" aria-label="Navegação principal">
+        <a class="nav__link" href="index.html">Página Inicial</a>
+        <a class="nav__link is-active" href="guia-epi.html">Central de EPIs</a>
+        <a class="nav__link" href="bloco-tecnico.html">Bloco Técnico</a>
+        <a class="nav__link" href="index.html#contato">Contato</a>
+    </nav>
+
+    <div class="header__actions">
+        <a href="index.html#contato" class="btn btn--gold btn--sm">Solicitar Assistência</a>
+    </div>
+</header>
+
+<section class="page-hero band--deep on-dark">
+    <div class="wrap">
+        <a href="index.html" class="crumb">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+            Retornar ao Hub
+        </a>
+        <h1>Central Técnica de EPIs</h1>
+        <p>Plataforma de compliance pericial: verificação de eficácia de atenuação, controle de vida útil e acervo de boletins técnicos homologados.</p>
+    </div>
+</section>
+
+<main>
+    <section class="band band--paper" id="informacao-fundamental">
+        <div class="wrap">
+            <div class="sec-head sec-head--left">
+                <span class="eyebrow eyebrow--left"><span class="eyebrow__num">01</span> Fundamentos Normativos</span>
+                <h2 class="sec-title">Conformidade &amp; Critérios de Proteção</h2>
+                <div class="sec-rule" style="margin-left:0"></div>
+            </div>
+
+            <div class="tech-table-wrap">
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Parâmetro de Controle</th>
+                            <th>Validade do CA (MTE)</th>
+                            <th>Vida Útil do Equipamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Natureza Jurídica</strong></td>
+                            <td>Prazo comercial regulado pelo Ministério do Trabalho e Emprego.</td>
+                            <td>Capacidade física e mecânica de resguardo em ambiente operacional.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aplicação em Campo</strong></td>
+                            <td>Permite a aquisição legal do lote. Se expirar após a compra, o uso continua regular.</td>
+                            <td>Fator determinante para a substituição programada e descarte preventivo.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fatores de Influência</strong></td>
+                            <td>Processos burocráticos, renovações laboratoriais e ensaios normativos do fabricante.</td>
+                            <td>Intensidade de uso, higienização, agentes ambientais e desgaste do material base.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="band band--white" id="repositorio-tecnico">
+        <div class="wrap">
+            <div class="sec-head">
+                <span class="eyebrow"><span class="eyebrow__num">02</span> Acervo Homologado</span>
+                <h2 class="sec-title">Equipamentos &amp; Boletins Técnicos</h2>
+                <div class="sec-rule"></div>
+            </div>
+
+            <div class="search-bar">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="search" id="buscaCA" placeholder="Buscar por número do CA ou nome do equipamento…" aria-label="Buscar Certificado de Aprovação">
+            </div>
+
+            <div class="status-filters" role="group" aria-label="Filtrar por situação do CA">
+                <button class="filter-chip is-active" type="button" data-filter="todos">Todos</button>
+                <button class="filter-chip" type="button" data-filter="valido">CA Válido</button>
+                <button class="filter-chip" type="button" data-filter="vencido">CA Vencido</button>
+            </div>
+
+            <div class="tabs" role="tablist">
+                <button class="tab-btn is-active" type="button" data-tab="auriculares">Protetores Auriculares</button>
+                <button class="tab-btn" type="button" data-tab="cremes">Cremes Dermatológicos</button>
+            </div>
+
+            <div id="auriculares" class="tab-panel is-active">
+                <div class="epi-grid" data-epi-grid>
+                    <div class="epi-card" data-validade="2028-08-08" data-search="ca 5745 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 5745 (6 meses).png" alt="EPI CA 5745" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 5745</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 6 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 5745 (6 meses).pdf&ca=5745" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2028-05-21" data-search="ca 9584 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 9584 (4 meses).png" alt="EPI CA 9584" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 9584</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 4 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 9584 (4 meses).pdf&ca=9584" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-search="ca 10551 15485 29847 protetor auricular multi">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 10551 - CA 15485 - CA 29847 (4 meses).png" alt="EPI CAs" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CAs 10551 / 15485 / 29847</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 4 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <ul class="epi-sublist" data-multi-ca>
+                                <li data-ca="10551" data-validade="2025-11-04"></li>
+                                <li data-ca="15485" data-validade="2025-08-03"></li>
+                                <li data-ca="29847" data-validade="2022-01-31"></li>
+                            </ul>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 10551 - CA 15485 - CA 29847 (4 meses).pdf&ca=Multi-CA" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2030-01-03" data-search="ca 11512 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 11512 (6 meses).png" alt="EPI CA 11512" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 11512</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 6 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 11512 (6 meses).pdf&ca=11512" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2028-03-23" data-search="ca 11882 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 11882 (6 meses).png" alt="EPI CA 11882" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 11882</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 6 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 11882 (6 meses).pdf&ca=11882" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2029-12-02" data-search="ca 15624 abafador de ruído">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 15624 Abafador (18 meses).png" alt="EPI CA 15624" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Abafador de Ruído</span>
+                            <h3>CA 15624</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 18 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 15624 Abafador (18 meses).pdf&ca=15624" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2027-11-10" data-search="ca 19079 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 19079.png" alt="EPI CA 19079" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 19079</h3>
+                            <p class="epi-meta" style="font-style:italic">Sob Consulta Técnica</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 19079.pdf&ca=19079" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2027-12-13" data-search="ca 19578 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 19578 (3 meses).png" alt="EPI CA 19578" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 19578</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 3 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 19578 (3 meses).pdf&ca=19578" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2028-08-22" data-search="ca 27971 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/Ca 27971 (18 meses).png" alt="EPI CA 27971" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 27971</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 18 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/Ca 27971 (18 meses).pdf&ca=27971" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2028-08-01" data-search="ca 33835 kit abafador">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 33835 Kit Abafador (12 meses).png" alt="EPI CA 33835" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Kit Abafador</span>
+                            <h3>CA 33835</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 12 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 33835 Kit Abafador (12 meses).pdf&ca=33835" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2030-06-10" data-search="ca 35981 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 35981 (6 meses).png" alt="EPI CA 35981" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 35981</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 6 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 35981 (6 meses).pdf&ca=35981" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2027-04-01" data-search="ca 18189 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 18189 (6 meses).png" alt="EPI CA 18189" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 18189</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 6 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 18189 (6 meses).pdf&ca=18189" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+
+                    <div class="epi-card" data-validade="2028-09-25" data-search="ca 27972 protetor auricular">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 27972 (18 meses).png" alt="EPI CA 27972" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Protetor Auricular</span>
+                            <h3>CA 27972</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 18 Meses</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Protetores Auriculares/CA 27972 (18 meses).pdf&ca=27972" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="epi-empty" data-epi-empty>Nenhum EPI encontrado com esse número de CA ou nome. Tente também a outra aba.</div>
+            </div>
+
+            <div id="cremes" class="tab-panel">
+                <div class="epi-grid" data-epi-grid>
+                    <div class="epi-card" data-validade="2024-05-20" data-search="ca 35339 creme protetor dermatológico">
+                        <div class="epi-thumb"><img src="./images/EPIs/CA 35339 creme protetor.png" alt="EPI CA 35339" onerror="this.style.display='none'"></div>
+                        <div class="epi-body">
+                            <span class="epi-tag">Creme Protetor</span>
+                            <h3>CA 35339</h3>
+                            <p class="epi-meta"><strong>Vida Útil:</strong> 2 meses para 200 mL</p>
+                            <div class="epi-status-row" data-status-slot></div>
+                            <div class="epi-card__actions"><a href="visualizar-pdf.html?file=./Boletins Técnicos/Creme Protetor/CA 35339 creme protetor.pdf&ca=35339" target="_blank" class="btn btn--navy btn--sm">Boletim Técnico</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="epi-empty" data-epi-empty>Nenhum EPI encontrado com esse número de CA ou nome. Tente também a outra aba.</div>
+            </div>
+        </div>
+    </section>
+
+<section class="band band--paper" id="criterio-pericial">
+        <div class="wrap">
+            <div class="sec-head sec-head--left">
+                <span class="eyebrow eyebrow--left"><span class="eyebrow__num">03</span> Metodologia Científica</span>
+                <h2 class="sec-title">Estimativa de Vida Útil</h2>
+                <div class="sec-rule" style="margin-left:0"></div>
+            </div>
+
+            <div class="methodology">
+                <h3>Fundamentação Segundo o Estudo de Ayres &amp; Corrêa</h3>
+                <p>Na ausência de especificações expressas ou prazos determinados nos boletins técnicos dos fabricantes, este sistema computacional adota critérios científicos rigorosos fundamentados no renomado <strong>Estudo de Ayres &amp; Corrêa</strong> para a estimativa da vida útil dos Equipamentos de Proteção Individual.</p>
+                <p>O estudo estabelece referências empíricas com base no monitoramento do desgaste de materiais em ambientes industriais reais, considerando:</p>
+                <ul>
+                    <li>A natureza do polímero ou material base do EPI (ex: raspa de couro, nitrilo, PVC, poliuretano).</li>
+                    <li>A severidade da exposição a agentes químicos, físicos e biológicos descritos na NR-15.</li>
+                    <li>O histórico estatístico de fadiga mecânica do equipamento antes da perda de eficiência de atenuação/proteção.</li>
+                </ul>
+
+                <!-- Bloco com Capa do Livro e Quadro 2.4 (Controlados para Baixa Resolução) -->
+                <div class="methodology__quadro" style="margin-top: 28px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; justify-content: center;">
+                    
+                    <!-- Capa do Livro -->
+                    <figure style="flex: 1 1 200px; max-width: 240px; background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.04); margin: 0;">
+                        <img src="./images/Quadro de Estimativa de Vida Útil/manual_prevencao_acidentes_trabalho__2.jpg" 
+                             alt="Capa do Livro: Manual de Prevenção de Acidentes do Trabalho - Ayres &amp; Corrêa" 
+                             style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid #e0e0e0;"
+                             loading="lazy">
+                        <figcaption style="margin-top: 10px; font-size: 0.8125rem; color: #555555; text-align: center; font-style: italic; line-height: 1.35;">
+                            <strong>Obra de Referência:</strong> Manual de Prevenção de Acidentes do Trabalho (Ayres &amp; Corrêa).
+                        </figcaption>
+                    </figure>
+
+                    <!-- Quadro 2.4 -->
+                    <figure style="flex: 2 1 360px; max-width: 640px; background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.04); margin: 0;">
+                        <img src="./images/Quadro de Estimativa de Vida Útil/Quadro 2.4 - Vida útil estimada de equipamentos de proteção individual (EPIs)-1.png" 
+                             alt="Quadro 2.4 - Vida útil estimada de equipamentos de proteção individual (EPIs) - Ayres &amp; Corrêa" 
+                             style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid #e0e0e0;"
+                             loading="lazy">
+                        <figcaption style="margin-top: 10px; font-size: 0.8125rem; color: #555555; text-align: center; font-style: italic; line-height: 1.35;">
+                            <strong>Quadro 2.4:</strong> Vida útil estimada de equipamentos de proteção individual (EPIs).
+                        </figcaption>
+                    </figure>
+
+                </div>
+
+                <p class="methodology__note" style="margin-top: 24px;">*Nota pericial: a aplicação dessa metodologia confere à planilha um alto nível de integridade técnica e conformidade legal, servindo como sólida evidência documental em eventuais auditorias trabalhistas, vistorias do MTE ou perícias judiciais de insalubridade e periculosidade.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="wrap">
+        <h2>Precisa de assistência técnica?</h2>
+        <div class="sec-rule"></div>
+        <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:40px">
+            <a href="index.html#contato" class="btn btn--gold">Falar com a Orsati Perícia Judicial</a>
+            <a href="index.html#download-planilha-premium" class="btn btn--ghost">Ver Planilha de Gestão de EPIs</a>
+        </div>
+        <div class="site-footer__base">
+            <img src="./images/LogoEsc.png" alt="Orsati Perícia Judicial">
+            <p>&copy; 2026 Orsati Perícia Judicial &amp; Engenharia de Segurança. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<button type="button" class="scrolltop" id="btnScrollTop" aria-label="Voltar ao topo">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/></svg>
+</button>
+
+<script src="main.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    // Situação do CA calculada automaticamente pela data de validade, a cada carregamento —
+    // não depende de atualização manual. "Vencido" ganha um atalho para reconferir no MTE.
+    function calcularStatusAutomatico() {
+        function paraStatus(iso) {
+            const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+            return new Date(iso + 'T00:00:00') >= hoje ? 'valido' : 'vencido';
+        }
+        function paraBR(iso) { const p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+        const linkMte = '<a class="epi-recheck" href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener">Verificar no MTE →</a>';
+
+        document.querySelectorAll('.epi-card[data-validade]').forEach(function (cartao) {
+            const status = paraStatus(cartao.dataset.validade);
+            cartao.dataset.status = status;
+            const slot = cartao.querySelector('[data-status-slot]');
+            if (!slot) return;
+            slot.innerHTML = '<span class="epi-status epi-status--' + (status === 'valido' ? 'ok' : 'vencido') + '">' +
+                (status === 'valido' ? 'Válido' : 'Vencido') + '</span><span class="epi-date">' +
+                (status === 'valido' ? 'até ' : 'venceu em ') + paraBR(cartao.dataset.validade) + '</span>' +
+                (status === 'vencido' ? linkMte : '');
+        });
+
+        document.querySelectorAll('.epi-sublist[data-multi-ca]').forEach(function (lista) {
+            let algumVencido = false;
+            lista.querySelectorAll('li[data-validade]').forEach(function (li) {
+                const status = paraStatus(li.dataset.validade);
+                if (status === 'vencido') algumVencido = true;
+                li.innerHTML = '<strong>CA ' + li.dataset.ca + '</strong> — ' + (status === 'valido' ? 'válido até ' : 'vencido em ') + paraBR(li.dataset.validade);
+            });
+            const cartao = lista.closest('.epi-card');
+            if (!cartao) return;
+            cartao.dataset.status = algumVencido ? 'vencido' : 'valido';
+            const slot = cartao.querySelector('[data-status-slot]');
+            if (slot) slot.innerHTML = algumVencido
+                ? '<span class="epi-status epi-status--vencido">Um ou mais vencidos</span>' + linkMte
+                : '<span class="epi-status epi-status--ok">Todos válidos</span>';
+        });
+    }
+    calcularStatusAutomatico();
+
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+    tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            tabs.forEach(function (t) { t.classList.remove('is-active'); });
+            panels.forEach(function (p) { p.classList.remove('is-active'); });
+            tab.classList.add('is-active');
+            document.getElementById(tab.dataset.tab).classList.add('is-active');
+            filtrar();
+        });
+    });
+
+    const busca = document.getElementById('buscaCA');
+    const chipsFiltro = document.querySelectorAll('.filter-chip');
+    let filtroStatus = 'todos';
+    chipsFiltro.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+            chipsFiltro.forEach(function (c) { c.classList.remove('is-active'); });
+            chip.classList.add('is-active');
+            filtroStatus = chip.dataset.filter;
+            filtrar();
+        });
+    });
+
+    function filtrar() {
+        const termo = busca.value.trim().toLowerCase();
+        document.querySelectorAll('.tab-panel').forEach(function (painel) {
+            const cartoes = painel.querySelectorAll('.epi-card');
+            let visiveis = 0;
+            cartoes.forEach(function (cartao) {
+                const alvo = cartao.dataset.search || '';
+                const bateTexto = !termo || alvo.includes(termo);
+                const bateStatus = filtroStatus === 'todos' || cartao.dataset.status === filtroStatus;
+                const bate = bateTexto && bateStatus;
+                cartao.style.display = bate ? '' : 'none';
+                if (bate) visiveis++;
+            });
+            const vazio = painel.querySelector('[data-epi-empty]');
+            if (vazio) vazio.classList.toggle('is-visible', visiveis === 0 && painel.classList.contains('is-active'));
+        });
+    }
+    busca.addEventListener('input', filtrar);
+
+    const btnTopo = document.getElementById('btnScrollTop');
+    btnTopo.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    window.addEventListener('scroll', function () {
+        btnTopo.classList.toggle('is-visible', window.pageYOffset > 400);
+    }, { passive: true });
+})();
+</script>
+</body>
+</html>
