@@ -99,8 +99,8 @@ strong { font-weight: 700; }
 
 a { color: var(--navy-700); text-decoration: none; transition: color 0.2s ease; }
 a:hover { color: var(--gold-deep); }
-.on-dark a { color: var(--gold-light); }
-.on-dark a:hover { color: var(--white); }
+.on-dark a:not(.btn) { color: var(--gold-light); }
+.on-dark a:not(.btn):hover { color: var(--white); }
 
 ::selection { background: var(--gold); color: var(--navy-900); }
 
@@ -153,6 +153,34 @@ a:hover { color: var(--gold-deep); }
 }
 .nav__link:hover, .nav__link.is-active { color: var(--gold-deep); }
 .nav__link:hover::after, .nav__link.is-active::after { transform: scaleX(1); transform-origin: left; }
+
+/* Dropdown "Recursos Técnicos" na navegação desktop */
+.nav__dropdown { position: relative; }
+.nav__dropdown-trigger {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--sans); background: none; border: 0; cursor: pointer;
+}
+.nav__dropdown-trigger svg { transition: transform 0.25s var(--ease); }
+.nav__dropdown:hover .nav__dropdown-trigger svg,
+.nav__dropdown:focus-within .nav__dropdown-trigger svg { transform: rotate(180deg); }
+.nav__dropdown-menu {
+    position: absolute; right: 0; top: calc(100% + 12px);
+    min-width: 262px; padding: 8px 0;
+    background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--sh-2);
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity 0.22s ease, transform 0.22s var(--ease), visibility 0.22s;
+    z-index: 950;
+}
+.nav__dropdown:hover .nav__dropdown-menu,
+.nav__dropdown:focus-within .nav__dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav__dropdown-menu a {
+    display: block; padding: 11px 20px;
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 0.02em;
+    color: var(--navy-700);
+}
+.nav__dropdown-menu a:hover { background: var(--paper); color: var(--gold-deep); }
+.nav__dropdown-menu hr { height: 1px; margin: 6px 14px; background: var(--line); border: 0; }
 
 .header__actions { display: flex; align-items: center; gap: 12px; }
 
@@ -378,16 +406,16 @@ a:hover { color: var(--gold-deep); }
 /* OPÇÃO A (hero--full): a dobra é só o discurso + foto, ocupando a tela toda.
    A factbar (2015, CREA...) fica logo abaixo e aparece quando o usuário rola. */
 .hero--full {
-    min-height: 100vh; min-height: 100dvh;
+    min-height: calc(100vh - 82px); min-height: calc(100dvh - 82px);
     grid-template-rows: 1fr auto;
-    padding: clamp(70px, 9vw, 120px) 0 0;
+    align-content: center;
+    padding: clamp(32px, 4vw, 56px) 0 clamp(32px, 4vw, 56px);
 }
+.hero--full > .wrap { align-self: center; }
 .hero--full .factbar {
     position: absolute; left: 0; right: 0; bottom: 0;
-    /* some da primeira dobra empurrando-se pra logo abaixo do limite da tela */
     transform: translateY(100%);
 }
-/* como a factbar está "para fora", garantimos respiro pra próxima seção não colar */
 
 /* OPÇÃO B (hero--fit): discurso, foto E credenciais, tudo encaixado numa tela só. */
 .hero--fit {
