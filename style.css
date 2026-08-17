@@ -1042,6 +1042,20 @@ header:not(.site-header) nav a:hover { color: var(--gold-deep); }
     pointer-events: none; transition: transform 0.5s var(--ease);
     -webkit-user-drag: none; -webkit-user-drag: none; -webkit-touch-callout: none;
 }
+
+/* Garante que as setas fiquem por cima de toda a galeria */
+.seta-esquerda, 
+.seta-direita {
+    position: absolute;
+    z-index: 10; /* O segredo está aqui */
+}
+
+/* Garante que a galeria respeite o z-index da seta */
+.filmstrip__row {
+    position: relative;
+    z-index: 1;
+}
+
 .filmstrip__item:hover img { transform: scale(1.04); }
 .zoomable { cursor: zoom-in; transition: filter 0.25s ease; }
 .zoomable:hover { filter: brightness(1.04); }
