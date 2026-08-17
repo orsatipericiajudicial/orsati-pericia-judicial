@@ -18,7 +18,37 @@
         iniciarParallax();
         iniciarGaleria();
         iniciarFormulario();
+        iniciarMenuMobile();
     });
+
+    /* 0. MENU MOBILE (hambúrguer que substitui a nav no celular) --------- */
+    function iniciarMenuMobile() {
+        const trigger = document.getElementById('menuMobileTrigger');
+        const painel = document.getElementById('menuMobilePanel');
+        if (!trigger || !painel) return;
+
+        function fechar() {
+            painel.classList.remove('is-open');
+            trigger.classList.remove('is-open');
+            trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        trigger.addEventListener('click', function () {
+            const abrindo = !painel.classList.contains('is-open');
+            painel.classList.toggle('is-open', abrindo);
+            trigger.classList.toggle('is-open', abrindo);
+            trigger.setAttribute('aria-expanded', abrindo ? 'true' : 'false');
+        });
+
+        painel.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', fechar);
+        });
+
+        // Fecha se a tela crescer de volta pro desktop (ex: rotação/resize)
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 992) fechar();
+        });
+    }
 
     /* 1. REVELAÇÃO ------------------------------------------------------- */
     function iniciarRevelacao() {
@@ -131,37 +161,137 @@
         }, { passive: true });
     }
 
-    /* 5. GALERIA (FAIXA DE FOTOS) ---------------------------------------- */
+    /* 5. GALERIA (FAIXA DE FOTOS) — parallax + arrasto + lightbox --------- */
     function iniciarGaleria() {
         const linhas = document.querySelectorAll('.filmstrip__row');
         if (!linhas.length) return;
 
-        if (reduzirMovimento) {
-            linhas.forEach(function (linha) {
-                linha.style.transform = 'translate3d(' + (Number(linha.dataset.base) || 0) + 'px,0,0)';
-            });
-            return;
+        // Estado de arrasto manual por linha (soma-se ao parallax de scroll)
+        const estados = new Map();
+        linhas.forEach(function (linha) { estados.set(linha, { drag: 0 }); });
+
+        function aplicarTransform(linha) {
+            const secao = linha.closest('section');
+            const rect = secao.getBoundingClientRect();
+            const meio = window.innerHeight / 2;
+            const distancia = meio - (rect.top + rect.height / 2);
+            const dir = Number(linha.dataset.parallaxDir) || 1;
+            const base = Number(linha.dataset.base) || 0;
+            const arrasto = estados.get(linha).drag;
+            const deslocamento = reduzirMovimento
+                ? base + arrasto
+                : base + distancia * 0.12 * dir + arrasto;
+            linha.style.transform = 'translate3d(' + deslocamento.toFixed(1) + 'px,0,0)';
         }
 
         let agendado = false;
-        function mover() {
-            const meio = window.innerHeight / 2;
-            linhas.forEach(function (linha) {
-                const secao = linha.closest('section');
-                const rect = secao.getBoundingClientRect();
-                const distancia = meio - (rect.top + rect.height / 2);
-                const dir = Number(linha.dataset.parallaxDir) || 1;
-                const base = Number(linha.dataset.base) || 0;
-                const deslocamento = base + distancia * 0.12 * dir;
-                linha.style.transform = 'translate3d(' + deslocamento.toFixed(1) + 'px,0,0)';
-            });
+        function moverTodas() {
+            linhas.forEach(aplicarTransform);
             agendado = false;
         }
-
         window.addEventListener('scroll', function () {
-            if (!agendado) { agendado = true; window.requestAnimationFrame(mover); }
+            if (!agendado) { agendado = true; window.requestAnimationFrame(moverTodas); }
         }, { passive: true });
-        mover();
+        window.addEventListener('resize', moverTodas);
+        moverTodas();
+
+        // Todas as fotos, em ordem, para navegação do lightbox
+        const todasImagens = Array.prototype.slice.call(document.querySelectorAll('.filmstrip__item img'));
+
+        /* -- Lightbox -- */
+        const lightbox = document.getElementById('lightboxGaleria');
+        const imgLightbox = document.getElementById('lightboxImagem');
+        const btnFechar = document.getElementById('lightboxFechar');
+        const btnAnterior = document.getElementById('lightboxAnterior');
+        const btnProxima = document.getElementById('lightboxProxima');
+        let indiceAtual = 0;
+
+        function atualizarLightbox() {
+            const img = todasImagens[indiceAtual];
+            imgLightbox.src = img.currentSrc || img.src;
+            imgLightbox.alt = img.alt || '';
+        }
+        function abrirLightbox(indice) {
+            if (!lightbox) return;
+            indiceAtual = indice;
+            atualizarLightbox();
+            lightbox.classList.add('is-open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            if (btnFechar) btnFechar.focus();
+        }
+        function fecharLightbox() {
+            if (!lightbox) return;
+            lightbox.classList.remove('is-open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+        function irPara(delta) {
+            indiceAtual = (indiceAtual + delta + todasImagens.length) % todasImagens.length;
+            atualizarLightbox();
+        }
+
+        if (lightbox && todasImagens.length) {
+            if (btnFechar) btnFechar.addEventListener('click', fecharLightbox);
+            if (btnAnterior) btnAnterior.addEventListener('click', function () { irPara(-1); });
+            if (btnProxima) btnProxima.addEventListener('click', function () { irPara(1); });
+            lightbox.addEventListener('click', function (e) { if (e.target === lightbox) fecharLightbox(); });
+            document.addEventListener('keydown', function (e) {
+                if (!lightbox.classList.contains('is-open')) return;
+                if (e.key === 'Escape') fecharLightbox();
+                if (e.key === 'ArrowLeft') irPara(-1);
+                if (e.key === 'ArrowRight') irPara(1);
+            });
+        }
+
+        /* -- Arrasto (mouse e toque) — não conflita com o clique -- */
+        linhas.forEach(function (linha) {
+            const estado = estados.get(linha);
+            let apertado = false;
+            let xInicial = 0;
+            let arrastoInicial = 0;
+            let deslocouBastante = false;
+
+            linha.addEventListener('pointerdown', function (e) {
+                if (e.pointerType === 'mouse' && e.button !== 0) return;
+                apertado = true;
+                deslocouBastante = false;
+                xInicial = e.clientX;
+                arrastoInicial = estado.drag;
+                linha.setPointerCapture(e.pointerId);
+                linha.classList.add('is-grabbing');
+            });
+
+            linha.addEventListener('pointermove', function (e) {
+                if (!apertado) return;
+                const delta = e.clientX - xInicial;
+                if (Math.abs(delta) > 6) deslocouBastante = true;
+                // Limita o arrasto pra não puxar a faixa toda pra fora da tela
+                const larguraExtra = Math.max(0, linha.scrollWidth - window.innerWidth);
+                const proposto = arrastoInicial + delta;
+                estado.drag = Math.min(60, Math.max(-larguraExtra - 60, proposto));
+                aplicarTransform(linha);
+            });
+
+            function soltar(e) {
+                if (!apertado) return;
+                apertado = false;
+                linha.classList.remove('is-grabbing');
+            }
+            linha.addEventListener('pointerup', soltar);
+            linha.addEventListener('pointercancel', soltar);
+            linha.addEventListener('pointerleave', function (e) {
+                if (apertado && e.buttons === 0) soltar(e);
+            });
+
+            linha.addEventListener('click', function (e) {
+                if (deslocouBastante) { e.preventDefault(); return; }
+                const img = e.target.closest('img');
+                if (!img) return;
+                const indice = todasImagens.indexOf(img);
+                if (indice > -1) abrirLightbox(indice);
+            });
+        });
     }
 
     /* 6. FORMULÁRIO DE CONTATO ------------------------------------------ */

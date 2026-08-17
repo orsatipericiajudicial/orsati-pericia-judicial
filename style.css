@@ -908,10 +908,82 @@ header:not(.site-header) nav a:hover { color: var(--gold-deep); }
 
 /* Galeria — faixa full-bleed com deriva horizontal ligada ao scroll */
 .filmstrip { display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
-.filmstrip__row { display: flex; gap: 14px; width: max-content; will-change: transform; }
-.filmstrip__item { height: 320px; flex-shrink: 0; border-radius: 12px; overflow: hidden; }
+.filmstrip__row {
+    display: flex; gap: 14px; width: max-content; will-change: transform;
+    cursor: grab; touch-action: pan-y; user-select: none;
+}
+.filmstrip__row.is-grabbing { cursor: grabbing; }
+.filmstrip__item { height: 320px; flex-shrink: 0; border-radius: 12px; overflow: hidden; cursor: pointer; }
+.filmstrip__item img { pointer-events: none; transition: transform 0.5s var(--ease); }
+.filmstrip__item:hover img { transform: scale(1.04); }
 @media (max-width: 768px) {
     .filmstrip__item { height: 190px; }
     .filmstrip { gap: 10px; }
     .filmstrip__row { gap: 10px; }
+}
+
+/* Lightbox da galeria */
+.lightbox {
+    position: fixed; inset: 0; z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(6, 13, 30, 0.94);
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    padding: clamp(16px, 5vw, 40px);
+}
+.lightbox.is-open { opacity: 1; visibility: visible; }
+.lightbox__img {
+    max-width: 90vw; max-height: 86vh;
+    border-radius: 8px;
+    box-shadow: var(--sh-3);
+    transform: scale(0.96);
+    transition: transform 0.3s var(--ease);
+}
+.lightbox.is-open .lightbox__img { transform: scale(1); }
+.lightbox__close, .lightbox__prev, .lightbox__next {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--white); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: var(--transition);
+}
+.lightbox__close:hover, .lightbox__prev:hover, .lightbox__next:hover { background: var(--gold); border-color: var(--gold); color: var(--navy-900); }
+.lightbox__close { top: 18px; right: 18px; width: 44px; height: 44px; }
+.lightbox__prev, .lightbox__next { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; }
+.lightbox__prev { left: 18px; }
+.lightbox__next { right: 18px; }
+@media (max-width: 640px) {
+    .lightbox__prev, .lightbox__next { width: 40px; height: 40px; }
+    .lightbox__close { width: 36px; height: 36px; top: 10px; right: 10px; }
+    .lightbox__prev { left: 8px; }
+    .lightbox__next { right: 8px; }
+}
+
+/* Menu mobile — hambúrguer que substitui a .nav quando ela some (≤992px) */
+.nav-mobile__trigger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 40px; height: 40px; padding: 10px 8px;
+    background: none; border: 1px solid var(--line); border-radius: var(--radius-sm);
+    cursor: pointer; transition: var(--transition);
+}
+.nav-mobile__trigger span { display: block; height: 2px; width: 100%; background: var(--navy-700); border-radius: 2px; transition: var(--transition); }
+.nav-mobile__trigger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-mobile__trigger.is-open span:nth-child(2) { opacity: 0; }
+.nav-mobile__trigger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile__panel {
+    display: none; flex-direction: column;
+    position: absolute; left: 0; right: 0; top: 100%; z-index: 890;
+    background: var(--white); border-bottom: 1px solid var(--line); box-shadow: var(--sh-2);
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height 0.35s var(--ease), opacity 0.25s ease;
+}
+.nav-mobile__panel.is-open { max-height: 480px; opacity: 1; }
+.nav-mobile__panel a {
+    padding: 15px var(--gutter); font-weight: 700; color: var(--navy-700);
+    border-bottom: 1px solid var(--line);
+}
+.nav-mobile__panel a:last-child { border-bottom: 0; margin: 10px var(--gutter) 4px; }
+@media (max-width: 992px) {
+    .nav-mobile__trigger { display: flex; }
+    .nav-mobile__panel { display: flex; }
 }
