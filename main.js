@@ -246,26 +246,14 @@
     }
 
     /* -- Qualquer imagem de conteúdo, clicável só no mobile -- */
-    function iniciarImagensClicaveisMobile() {
+    /* -- Imagens clicáveis (Agora liberado para Desktop e Mobile) -- */
+    function iniciarImagensClicaveis() {
         document.addEventListener('click', function (e) {
             const img = e.target.closest('img');
             if (!img) return;
-            if (img.closest('a')) return; // não interfere em logos/links de navegação
-            if (img.closest('.filmstrip__item')) return; // já tratado pela galeria
-            if (img.closest('.site-header, .nav-mobile__panel, .site-footer, .lightbox')) return;
-
-            const marcadaParaZoom = img.hasAttribute('data-zoom') || img.closest('[data-zoom]');
-            // No desktop, só abre imagens marcadas com data-zoom (ex.: quadros da Central de EPIs).
-            // No mobile, qualquer imagem de conteúdo abre.
-            if (!ehMobile() && !marcadaParaZoom) return;
-
-            // Se houver um grupo de imagens com data-zoom-group, navega entre elas
-            const grupoNome = img.getAttribute('data-zoom-group') || (img.closest('[data-zoom-group]') && img.closest('[data-zoom-group]').getAttribute('data-zoom-group'));
-            if (grupoNome) {
-                const grupo = Array.prototype.slice.call(document.querySelectorAll('img[data-zoom-group="' + grupoNome + '"]'));
-                const idx = grupo.indexOf(img);
-                if (grupo.length && idx > -1) { abrirLightbox(grupo, idx); return; }
-            }
+            if (img.closest('a')) return; 
+            if (img.closest('.filmstrip__item')) return; 
+            if (img.closest('.site-header, .nav-mobile__panel, .site-footer, .lightbox, .hero')) return;
             abrirLightbox([img], 0);
         });
     }
@@ -274,7 +262,6 @@
         const linhas = document.querySelectorAll('.filmstrip__row');
         if (!linhas.length) return;
 
-        // Estado de arrasto manual por linha (soma-se ao parallax de scroll) — só desktop
         const estados = new Map();
         linhas.forEach(function (linha) { estados.set(linha, { drag: 0 }); });
 
@@ -303,10 +290,8 @@
         window.addEventListener('resize', moverTodas);
         moverTodas();
 
-        // Todas as fotos, em ordem, pra navegação do lightbox
         const todasImagens = Array.prototype.slice.call(document.querySelectorAll('.filmstrip__item img'));
 
-        /* -- Arrasto manual (só desktop — no mobile o scroll nativo cuida) -- */
         linhas.forEach(function (linha) {
             const estado = estados.get(linha);
             let apertado = false;
@@ -315,7 +300,7 @@
             let deslocouBastante = false;
 
             linha.addEventListener('pointerdown', function (e) {
-                if (ehMobile()) return; // deixa o overflow-scroll nativo cuidar no celular
+                if (ehMobile()) return; 
                 if (e.pointerType === 'mouse' && e.button !== 0) return;
                 apertado = true;
                 deslocouBastante = false;
@@ -357,7 +342,7 @@
             });
         });
     }
-
+    
     /* 6. FORMULÁRIO DE CONTATO ------------------------------------------ */
     function iniciarFormulario() {
         const form = document.getElementById('formContatoPericial');
