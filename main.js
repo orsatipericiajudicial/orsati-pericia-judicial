@@ -23,7 +23,7 @@
         iniciarMenuMobile();
     });
 
-    /* 0. MENU MOBILE (hambúrguer que substitui a nav no celular) --------- */
+ /* 0. MENU MOBILE (hambúrguer que substitui a nav no celular) --------- */
     function iniciarMenuMobile() {
         const trigger = document.getElementById('menuMobileTrigger');
         const painel = document.getElementById('menuMobilePanel');
@@ -46,7 +46,6 @@
             a.addEventListener('click', fechar);
         });
 
-        // Fecha se a tela crescer de volta pro desktop (ex: rotação/resize)
         window.addEventListener('resize', function () {
             if (window.innerWidth > 992) fechar();
         });
