@@ -391,16 +391,15 @@ a:hover { color: var(--gold-deep); }
 .stack { display: flex; flex-direction: column; gap: clamp(18px, 2vw, 30px); }
 
 /* ==========================================================================
-   HERO (Corrigindo o espaçamento excessivo)
+   HERO (Mantendo a correção de espaçamento)
    ========================================================================== */
 .hero {
     position: relative;
     background: var(--navy-900);
     color: var(--on-dark);
     overflow: hidden;
-    display: flex; /* Mudamos de grid para flex para centralizar melhor */
+    display: flex; 
     align-items: center;
-    /* Reduzimos a altura mínima para descontar o cabeçalho e não sobrar espaço */
     min-height: calc(100vh - 82px);
     min-height: calc(100dvh - 82px);
     padding: clamp(40px, 6vw, 80px) 0;
@@ -408,7 +407,6 @@ a:hover { color: var(--gold-deep); }
 .hero::before { display: none; }
 .hero > .wrap { width: 100%; }
 
-/* Anulamos as antigas regras que empurravam o conteúdo para baixo */
 .hero--fit, .hero--full { display: contents; }
 
 .hero__media { position: absolute; inset: -8% 0; z-index: 1; pointer-events: none; }
@@ -437,9 +435,8 @@ a:hover { color: var(--gold-deep); }
 .hero__lead strong { color: var(--white); }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; }
 
-
 /* ==========================================================================
-   FACTBAR (Animação 3D Realista e Placar de TV)
+   FACTBAR (Efeito de abertura de portas - Placar)
    ========================================================================== */
 .reveal-factbar {
     position: relative;
@@ -449,7 +446,6 @@ a:hover { color: var(--gold-deep); }
     opacity: 0;
     transition: transform 1s var(--ease), opacity 0.9s var(--ease);
     will-change: transform, opacity;
-    perspective: 1200px; /* Adicionado para dar profundidade 3D ao capacete */
 }
 .reveal-factbar.is-in {
     transform: translateY(0);
@@ -472,8 +468,8 @@ a:hover { color: var(--gold-deep); }
     width: 50%;
     background: linear-gradient(135deg, var(--navy-700), var(--navy-800));
     z-index: 10;
-    /* Abre em 0.4s (rápido) após 1.7s de espera (tempo do capacete) */
-    transition: transform 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) 1.7s;
+    /* Inicia a abertura das portas após um pequeno delay (0.3s) */
+    transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0.3s;
 }
 .factbar-door--left {
     left: 0;
@@ -489,94 +485,23 @@ a:hover { color: var(--gold-deep); }
 .reveal-factbar.is-in .factbar-door--left { transform: translateX(-100%); }
 .reveal-factbar.is-in .factbar-door--right { transform: translateX(100%); }
 
-.factbar-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 12;
-    background: var(--navy-900);
-    padding: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-    box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(185, 154, 91, 0.2);
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5);
-    transform-style: preserve-3d; /* Permite a rotação 3D dos elementos internos */
-}
-
-.reveal-factbar.is-in .factbar-icon {
-    /* O capacete fica 2 segundos em cena fazendo o show */
-    animation: helmet-3d-spin 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* A Mágica do Capacete Girando */
-@keyframes helmet-3d-spin {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5) rotateY(-90deg);
-    }
-    15% { /* Aparece e para de frente rapidinho */
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1) rotateY(0deg);
-    }
-    60% { /* Gira devagar (2 voltas completas) permitindo ver os detalhes */
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.1) rotateY(720deg);
-    }
-    85% { /* Dá um giro super rápido finalizando a apresentação */
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.2) rotateY(1080deg);
-    }
-    95% { /* Dá um zoom extremo como se batesse na tela */
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(3) rotateY(1260deg);
-    }
-    100% { /* Some para revelar os dados */
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(3) rotateY(1260deg);
-        visibility: hidden;
-    }
-}
-
 .factbar-doors .factbar__grid {
     opacity: 0;
-    transform: scale(0.95);
-    /* Aparece logo após a porta abrir (1.8s) */
-    transition: opacity 0.4s ease 1.8s, transform 0.4s ease 1.8s;
+    transform: scale(0.98);
+    /* Aparece o conteúdo logo em seguida ao movimento das portas */
+    transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s;
 }
 .reveal-factbar.is-in .factbar-doors .factbar__grid {
     opacity: 1;
     transform: scale(1);
 }
 
+/* Grids internos */
 .factbar__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255, 255, 255, 0.08); }
 .factbar__item { padding: 26px 22px; background: var(--navy-900); }
 .factbar__k { display: block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
 .factbar__v { font-family: var(--serif); font-size: var(--step-2); color: var(--white); line-height: 1.25; }
 .factbar__s { display: block; font-size: 0.82rem; color: var(--on-dark-mute); margin-top: 4px; }
-
-/* Cartão de competência */
-.comp-card { padding: clamp(26px, 3vw, 36px) clamp(22px, 2.4vw, 28px); border-radius: var(--radius); }
-.comp-card__icon { color: var(--gold-light); margin-bottom: 22px; }
-.comp-card h3 { color: var(--white); font-size: var(--step-2); margin-bottom: 12px; }
-.comp-card p { color: var(--on-dark-mute); font-size: 0.92rem; line-height: 1.65; }
-
-/* Sobre / autoridade */
-.about { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(36px, 5vw, 64px); align-items: center; }
-.about__media { margin-top: clamp(-150px, -9vw, 0px); }
-.about__media .frame__inner { height: clamp(360px, 46vw, 470px); }
-.about__split {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-    border-top: 1px solid var(--line); padding-top: 22px; margin-top: 28px;
-}
-.about__split h4 { font-family: var(--sans); font-size: 1.02rem; color: var(--navy-700); margin-bottom: 4px; }
-.about__split p { font-size: 0.86rem; color: var(--ink-mute); line-height: 1.5; }
-.about__split > div + div { border-left: 1px solid var(--line); padding-left: 24px; }
-
-.prose p { color: var(--ink-soft); margin-bottom: 16px; }
-.prose p strong { color: var(--navy-700); }
-.prose p:first-of-type { color: var(--ink); font-weight: 500; font-size: var(--step-1); }
-
 /* Credenciais */
 .badge-card {
     padding: 26px 20px; text-align: center; border-radius: var(--radius);
