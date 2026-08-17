@@ -56,11 +56,11 @@
         <a href="#quem-sou-eu">Quem sou eu</a>
         <a href="#qualificacao-tecnica">Credenciais</a>
         <a href="#equipamentos-tecnicos">Instrumental</a>
-        <a href="guia-epi.html" target="_blank">Central Técnica de EPIs</a>
-        <a href="bloco-tecnico.html">Bloco Técnico (Artigos)</a>
         <a href="#download-planilha-premium">Planilha de Gestão de EPIs</a>
-        <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
         <a href="#contato">Contato</a>
+        <a href="bloco-tecnico.html">Bloco Técnico (Artigos)</a>
+        <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
+        <a href="guia-epi.html" target="_blank" class="btn btn--gold btn--sm">Central Técnica EPI</a>
     </nav>
 </header>
 
@@ -77,7 +77,10 @@
 <main>
 
     <!-- ============================ HERO ============================ -->
-    <section class="hero hero--fit band--seamless on-dark" id="topo" data-screen-label="Hero">
+    <!-- OPÇÕES DE ALTURA (troque a classe na linha abaixo):
+         • hero--full → tela cheia SÓ com o discurso; as credenciais surgem ao rolar (ATIVO)
+         • hero--fit  → tela cheia COM as credenciais (2015/CREA/MTE) já encaixadas -->
+    <section class="hero hero--full band--seamless on-dark" id="topo" data-screen-label="Hero">
         <div class="hero__media">
             <video class="hero__video parallax" id="videoHero" autoplay muted loop playsinline poster="./Images/Orsati Foto 15.jpeg">
                 <source src="./Images/VideoFundo.mp4" type="video/mp4">
@@ -113,42 +116,41 @@
         </div>
     </section>
 
+    <!-- ===== FAIXA DE CREDENCIAIS (efeito "placar" que abre ao rolar) ===== -->
+    <div class="factbar factbar--reveal" id="factbarReveal" aria-label="Credenciais e atuação">
+        <div class="wrap">
+            <div class="factbar__grid">
+                <div class="factbar__item">
+                    <span class="factbar__k">Atuação pericial</span>
+                    <span class="factbar__v">Desde 2015</span>
+                    <span class="factbar__s">Varas Federais, Cíveis e Trabalhistas</span>
+                </div>
+                <div class="factbar__item">
+                    <span class="factbar__k">Conselho de classe</span>
+                    <span class="factbar__v">CREA</span>
+                    <span class="factbar__s">Atuação habilitada</span>
+                </div>
+                <div class="factbar__item">
+                    <span class="factbar__k">Registro ministerial</span>
+                    <span class="factbar__v">MTE</span>
+                    <span class="factbar__s">Segurança no Trabalho</span>
+                </div>
+                <div class="factbar__item">
+                    <span class="factbar__k">Jurisdição</span>
+                    <span class="factbar__v">SP, MS e MG</span>
+                    <span class="factbar__s">+30 comarcas e varas</span>
+                </div>
+            </div>
+        </div>
+        <!-- Duas "viseiras" douradas que abrem do centro pra fora, revelando os dados -->
+        <div class="factbar__shutter factbar__shutter--top" aria-hidden="true"></div>
+        <div class="factbar__shutter factbar__shutter--bottom" aria-hidden="true"></div>
+        <div class="factbar__seam" aria-hidden="true"></div>
+    </div>
+
     <!-- ===================== 01 ÁREAS DE ATUAÇÃO ===================== -->
     <section class="band band--dark on-dark" id="areas-atuacao" data-screen-label="Áreas de Atuação">
         <div class="wrap">
-            
-            <!-- FACTBAR ANIMADO (PORTAS ESTILO PLACAR) -->
-            <div class="reveal-factbar reveal">
-                <div class="factbar-doors">
-                    <div class="factbar-door factbar-door--left"></div>
-                    <div class="factbar-door factbar-door--right"></div>
-                    
-                    <div class="factbar__grid">
-                        <div class="factbar__item">
-                            <span class="factbar__k">Atuação pericial</span>
-                            <span class="factbar__v">Desde 2015</span>
-                            <span class="factbar__s">Varas Federais, Cíveis e Trabalhistas</span>
-                        </div>
-                        <div class="factbar__item">
-                            <span class="factbar__k">Conselho de classe</span>
-                            <span class="factbar__v">CREA</span>
-                            <span class="factbar__s">Atuação habilitada</span>
-                        </div>
-                        <div class="factbar__item">
-                            <span class="factbar__k">Registro ministerial</span>
-                            <span class="factbar__v">MTE</span>
-                            <span class="factbar__s">Segurança no Trabalho</span>
-                        </div>
-                        <div class="factbar__item">
-                            <span class="factbar__k">Jurisdição</span>
-                            <span class="factbar__v">SP, MS e MG</span>
-                            <span class="factbar__s">+30 comarcas e varas</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- FIM FACTBAR -->
-
             <div class="sec-head reveal">
                 <span class="eyebrow"><span class="eyebrow__num">01</span> Especialidades Técnicas</span>
                 <h2 class="sec-title">Áreas de Atuação &amp; Competências</h2>
@@ -172,23 +174,23 @@
                     <p>Atuação como Perito do Juízo ou Assistente Técnico. Elaboração estratégica de quesitos, pareceres e acompanhamento de diligências processuais.</p>
                 </article>
 
-                <article class="comp-card card--glass card--lift reveal">
-                    <div class="comp-card__icon">
-                        <img 
-                            src="./Images/Icons/EPIs.png" 
-                            alt="Ícone Higiene Ocupacional" 
-                            style="
-                                width: 50px; 
-                                height: 50px; 
-                                object-fit: contain; 
-                                display: block; 
-                                filter: brightness(0) saturate(100%) invert(79%) sepia(21%) saturate(543%) hue-rotate(359deg) brightness(91%) contrast(87%);
-                            "
-                        >
-                    </div>
-                    <h3>Higiene Ocupacional</h3>
-                    <p>Avaliações de agentes ambientais (físicos, químicos e biológicos). Identificação, análise técnica e mitigação ativa de riscos à saúde do trabalhador.</p>
-                </article>
+<article class="comp-card card--glass card--lift reveal">
+    <div class="comp-card__icon">
+        <img 
+            src="./Images/Icons/EPIs.png" 
+            alt="Ícone Higiene Ocupacional" 
+            style="
+                width: 50px; 
+                height: 50px; 
+                object-fit: contain; 
+                display: block; 
+                filter: brightness(0) saturate(100%) invert(79%) sepia(21%) saturate(543%) hue-rotate(359deg) brightness(91%) contrast(87%);
+            "
+        >
+    </div>
+    <h3>Higiene Ocupacional</h3>
+    <p>Avaliações de agentes ambientais (físicos, químicos e biológicos). Identificação, análise técnica e mitigação ativa de riscos à saúde do trabalhador.</p>
+</article>
 
                 <article class="comp-card card--glass card--lift reveal">
                     <div class="comp-card__icon">
@@ -278,7 +280,7 @@
             </div>
         </div>
     </div>
-    </section>
+</section>
 
     <!-- =================== 03 QUALIFICAÇÃO TÉCNICA =================== -->
     <section class="band band--deep on-dark" id="qualificacao-tecnica" data-screen-label="Qualificação Técnica">
@@ -784,7 +786,6 @@
                             <p>Acompanhe nossas análises de casos e atualizações técnicas da área.</p>
                         </div>
                     </a>
-
                 </div>
 
                 <div class="contact__form reveal" style="--i:1">

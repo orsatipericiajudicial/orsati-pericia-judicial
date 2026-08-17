@@ -50,11 +50,12 @@
 
     <nav class="nav-mobile__panel" id="menuMobilePanel" aria-label="Navegação principal (mobile)">
         <a href="index.html">Página Inicial</a>
-        <a href="guia-epi.html">Central de EPIs</a>
+        <a href="guia-epi.html" class="is-active">Central de EPIs</a>
         <a href="bloco-tecnico.html">Bloco Técnico</a>
         <a href="index.html#download-planilha-premium">Planilha de Gestão de EPIs</a>
-        <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
         <a href="index.html#contato">Contato</a>
+        <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
+        <a href="index.html#contato" class="btn btn--gold btn--sm">Solicitar Assistência</a>
     </nav>
 </header>
 
@@ -329,7 +330,8 @@
                     <figure style="flex: 1 1 200px; max-width: 240px; background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.04); margin: 0;">
                         <img src="./Images/Quadro de Estimativa de Vida Útil/manual_prevencao_acidentes_trabalho__2.jpg" 
                              alt="Capa do Livro: Manual de Prevenção de Acidentes do Trabalho - Ayres &amp; Corrêa" 
-                             style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid #e0e0e0;"
+                             class="zoomable" data-zoom data-zoom-group="quadro-ayres"
+                             style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid #e0e0e0; cursor: zoom-in;"
                              loading="lazy">
                         <figcaption style="margin-top: 10px; font-size: 0.8125rem; color: #555555; text-align: center; font-style: italic; line-height: 1.35;">
                             <strong>Obra de Referência:</strong> Manual de Prevenção de Acidentes do Trabalho (Ayres &amp; Corrêa).
@@ -340,10 +342,11 @@
                     <figure style="flex: 2 1 360px; max-width: 640px; background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.04); margin: 0;">
                         <img src="./Images/Quadro de Estimativa de Vida Útil/Quadro 2.4 - Vida útil estimada de equipamentos de proteção individual (EPIs)-1.png" 
                              alt="Quadro 2.4 - Vida útil estimada de equipamentos de proteção individual (EPIs) - Ayres &amp; Corrêa" 
-                             style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid #e0e0e0;"
+                             class="zoomable" data-zoom data-zoom-group="quadro-ayres"
+                             style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid #e0e0e0; cursor: zoom-in;"
                              loading="lazy">
                         <figcaption style="margin-top: 10px; font-size: 0.8125rem; color: #555555; text-align: center; font-style: italic; line-height: 1.35;">
-                            <strong>Quadro 2.4:</strong> Vida útil estimada de equipamentos de proteção individual (EPIs).
+                            <strong>Quadro 2.4:</strong> Vida útil estimada de equipamentos de proteção individual (EPIs). <span style="font-style: normal; color: var(--gold-deep); font-weight: 700;">(clique para ampliar)</span>
                         </figcaption>
                     </figure>
 
@@ -378,11 +381,11 @@
     <button class="lightbox__close" id="lightboxFechar" aria-label="Fechar">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>
     </button>
-    <button class="lightbox__prev" id="lightboxAnterior" aria-label="Foto anterior">
+    <button class="lightbox__prev" id="lightboxAnterior" aria-label="Imagem anterior">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
     <img class="lightbox__img" id="lightboxImagem" src="" alt="">
-    <button class="lightbox__next" id="lightboxProxima" aria-label="Próxima foto">
+    <button class="lightbox__next" id="lightboxProxima" aria-label="Próxima imagem">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </button>
 </div>
