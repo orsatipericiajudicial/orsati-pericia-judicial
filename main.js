@@ -17,7 +17,7 @@
         iniciarTrilha();
         iniciarParallax();
         iniciarGaleria();
-        iniciarImagensClicaveisMobile();
+        iniciarImagensClicaveis();
         iniciarFormulario();
         iniciarMenuMobile();
     });
@@ -45,7 +45,6 @@
             a.addEventListener('click', fechar);
         });
 
-        // Fecha se a tela crescer de volta pro desktop (ex: rotação/resize)
         window.addEventListener('resize', function () {
             if (window.innerWidth > 992) fechar();
         });
@@ -53,7 +52,6 @@
 
     /* 1. REVELAÇÃO ------------------------------------------------------- */
     function iniciarRevelacao() {
-        // Escalona o atraso dos filhos de cada grupo marcado com data-stagger
         document.querySelectorAll('[data-stagger]').forEach(function (grupo) {
             Array.prototype.forEach.call(grupo.children, function (filho, i) {
                 filho.style.setProperty('--i', i);
@@ -115,9 +113,6 @@
 
         if (!secoes.length) return;
 
-        // Detecção por linha de referência: robusta para seções de qualquer altura
-        // (um threshold de interseção falha em seções mais altas que a viewport,
-        // deixando a trilha "presa" na seção anterior — o bug relatado).
         let agendado = false;
         function atualizar() {
             const linha = window.innerHeight * 0.4;
@@ -127,7 +122,6 @@
             }
             itens.forEach(function (item, i) { item.classList.toggle('is-active', i === indiceAtivo); });
             trilha.classList.toggle('on-dark-rail', /band--dark|band--deep/.test(secoes[indiceAtivo].className));
-            // só emerge a partir da segunda seção (Áreas de Atuação) — fica ausente no hero
             trilha.classList.toggle('is-visible', secoes[0].getBoundingClientRect().top < window.innerHeight * 0.85);
             agendado = false;
         }
@@ -162,11 +156,10 @@
         }, { passive: true });
     }
 
-    /* 5. GALERIA (FAIXA DE FOTOS) — parallax + arrasto + lightbox --------- */
+    /* 5. GALERIA E LIGHTBOX ---------------------------------------------- */
     const MOBILE_MQ = '(max-width: 768px)';
     function ehMobile() { return window.matchMedia(MOBILE_MQ).matches; }
 
-    /* -- Lightbox compartilhado (galeria + imagens soltas no mobile) -- */
     const lightboxEl = document.getElementById('lightboxGaleria');
     const lightboxImg = document.getElementById('lightboxImagem');
     const lightboxClose = document.getElementById('lightboxFechar');
@@ -218,15 +211,14 @@
         });
     }
 
-    /* -- Qualquer imagem de conteúdo, clicável só no mobile -- */
-    function iniciarImagensClicaveisMobile() {
+    /* -- Imagens clicáveis (Liberado para Desktop e Mobile) -- */
+    function iniciarImagensClicaveis() {
         document.addEventListener('click', function (e) {
-            if (!ehMobile()) return;
             const img = e.target.closest('img');
             if (!img) return;
-            if (img.closest('a')) return; // não interfere em logos/links de navegação
-            if (img.closest('.filmstrip__item')) return; // já tratado pela galeria
-            if (img.closest('.site-header, .nav-mobile__panel, .site-footer, .lightbox')) return;
+            if (img.closest('a')) return; 
+            if (img.closest('.filmstrip__item')) return; 
+            if (img.closest('.site-header, .nav-mobile__panel, .site-footer, .lightbox, .hero')) return;
             abrirLightbox([img], 0);
         });
     }
@@ -235,7 +227,6 @@
         const linhas = document.querySelectorAll('.filmstrip__row');
         if (!linhas.length) return;
 
-        // Estado de arrasto manual por linha (soma-se ao parallax de scroll) — só desktop
         const estados = new Map();
         linhas.forEach(function (linha) { estados.set(linha, { drag: 0 }); });
 
@@ -264,10 +255,8 @@
         window.addEventListener('resize', moverTodas);
         moverTodas();
 
-        // Todas as fotos, em ordem, pra navegação do lightbox
         const todasImagens = Array.prototype.slice.call(document.querySelectorAll('.filmstrip__item img'));
 
-        /* -- Arrasto manual (só desktop — no mobile o scroll nativo cuida) -- */
         linhas.forEach(function (linha) {
             const estado = estados.get(linha);
             let apertado = false;
@@ -276,7 +265,7 @@
             let deslocouBastante = false;
 
             linha.addEventListener('pointerdown', function (e) {
-                if (ehMobile()) return; // deixa o overflow-scroll nativo cuidar no celular
+                if (ehMobile()) return; 
                 if (e.pointerType === 'mouse' && e.button !== 0) return;
                 apertado = true;
                 deslocouBastante = false;

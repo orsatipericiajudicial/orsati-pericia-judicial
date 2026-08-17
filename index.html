@@ -56,11 +56,11 @@
         <a href="#quem-sou-eu">Quem sou eu</a>
         <a href="#qualificacao-tecnica">Credenciais</a>
         <a href="#equipamentos-tecnicos">Instrumental</a>
-        <a href="#download-planilha-premium">Planilha de Gestão de EPIs</a>
-        <a href="#contato">Contato</a>
+        <a href="guia-epi.html" target="_blank">Central Técnica de EPIs</a>
         <a href="bloco-tecnico.html">Bloco Técnico (Artigos)</a>
+        <a href="#download-planilha-premium">Planilha de Gestão de EPIs</a>
         <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
-        <a href="guia-epi.html" target="_blank" class="btn btn--gold btn--sm">Central Técnica EPI</a>
+        <a href="#contato">Contato</a>
     </nav>
 </header>
 
@@ -77,9 +77,6 @@
 <main>
 
     <!-- ============================ HERO ============================ -->
-    <!-- OPÇÕES DE ALTURA (troque a classe na linha abaixo):
-         • hero--fit  → tela cheia COM as credenciais (2015/CREA/MTE) encaixadas (ATIVO)
-         • hero--full → tela cheia SÓ com o discurso; credenciais aparecem ao rolar -->
     <section class="hero hero--fit band--seamless on-dark" id="topo" data-screen-label="Hero">
         <div class="hero__media">
             <video class="hero__video parallax" id="videoHero" autoplay muted loop playsinline poster="./Images/Orsati Foto 15.jpeg">
@@ -114,38 +111,50 @@
                 </div>
             </div>
         </div>
-
-        <div class="factbar">
-            <div class="wrap">
-                <div class="factbar__grid">
-                    <div class="factbar__item">
-                        <span class="factbar__k">Atuação pericial</span>
-                        <span class="factbar__v">Desde 2015</span>
-                        <span class="factbar__s">Varas Federais, Cíveis e Trabalhistas</span>
-                    </div>
-                    <div class="factbar__item">
-                        <span class="factbar__k">Conselho de classe</span>
-                        <span class="factbar__v">CREA</span>
-                        <span class="factbar__s">Atuação habilitada</span>
-                    </div>
-                    <div class="factbar__item">
-                        <span class="factbar__k">Registro ministerial</span>
-                        <span class="factbar__v">MTE</span>
-                        <span class="factbar__s">Segurança no Trabalho</span>
-                    </div>
-                    <div class="factbar__item">
-                        <span class="factbar__k">Jurisdição</span>
-                        <span class="factbar__v">SP, MS e MG</span>
-                        <span class="factbar__s">+30 comarcas e varas</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- ===================== 01 ÁREAS DE ATUAÇÃO ===================== -->
     <section class="band band--dark on-dark" id="areas-atuacao" data-screen-label="Áreas de Atuação">
         <div class="wrap">
+            
+            <!-- FACTBAR ANIMADO (CAPACETE) -->
+            <div class="reveal-factbar reveal">
+                <div class="factbar-doors">
+                    <div class="factbar-door factbar-door--left"></div>
+                    <div class="factbar-door factbar-door--right"></div>
+                    <div class="factbar-icon">
+                        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/>
+                            <path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/>
+                            <path d="M4 15v-3a8 8 0 0 1 16 0v3"/>
+                        </svg>
+                    </div>
+                    <div class="factbar__grid">
+                        <div class="factbar__item">
+                            <span class="factbar__k">Atuação pericial</span>
+                            <span class="factbar__v">Desde 2015</span>
+                            <span class="factbar__s">Varas Federais, Cíveis e Trabalhistas</span>
+                        </div>
+                        <div class="factbar__item">
+                            <span class="factbar__k">Conselho de classe</span>
+                            <span class="factbar__v">CREA</span>
+                            <span class="factbar__s">Atuação habilitada</span>
+                        </div>
+                        <div class="factbar__item">
+                            <span class="factbar__k">Registro ministerial</span>
+                            <span class="factbar__v">MTE</span>
+                            <span class="factbar__s">Segurança no Trabalho</span>
+                        </div>
+                        <div class="factbar__item">
+                            <span class="factbar__k">Jurisdição</span>
+                            <span class="factbar__v">SP, MS e MG</span>
+                            <span class="factbar__s">+30 comarcas e varas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM FACTBAR -->
+
             <div class="sec-head reveal">
                 <span class="eyebrow"><span class="eyebrow__num">01</span> Especialidades Técnicas</span>
                 <h2 class="sec-title">Áreas de Atuação &amp; Competências</h2>
@@ -169,23 +178,23 @@
                     <p>Atuação como Perito do Juízo ou Assistente Técnico. Elaboração estratégica de quesitos, pareceres e acompanhamento de diligências processuais.</p>
                 </article>
 
-<article class="comp-card card--glass card--lift reveal">
-    <div class="comp-card__icon">
-        <img 
-            src="./Images/Icons/EPIs.png" 
-            alt="Ícone Higiene Ocupacional" 
-            style="
-                width: 50px; 
-                height: 50px; 
-                object-fit: contain; 
-                display: block; 
-                filter: brightness(0) saturate(100%) invert(79%) sepia(21%) saturate(543%) hue-rotate(359deg) brightness(91%) contrast(87%);
-            "
-        >
-    </div>
-    <h3>Higiene Ocupacional</h3>
-    <p>Avaliações de agentes ambientais (físicos, químicos e biológicos). Identificação, análise técnica e mitigação ativa de riscos à saúde do trabalhador.</p>
-</article>
+                <article class="comp-card card--glass card--lift reveal">
+                    <div class="comp-card__icon">
+                        <img 
+                            src="./Images/Icons/EPIs.png" 
+                            alt="Ícone Higiene Ocupacional" 
+                            style="
+                                width: 50px; 
+                                height: 50px; 
+                                object-fit: contain; 
+                                display: block; 
+                                filter: brightness(0) saturate(100%) invert(79%) sepia(21%) saturate(543%) hue-rotate(359deg) brightness(91%) contrast(87%);
+                            "
+                        >
+                    </div>
+                    <h3>Higiene Ocupacional</h3>
+                    <p>Avaliações de agentes ambientais (físicos, químicos e biológicos). Identificação, análise técnica e mitigação ativa de riscos à saúde do trabalhador.</p>
+                </article>
 
                 <article class="comp-card card--glass card--lift reveal">
                     <div class="comp-card__icon">
@@ -779,16 +788,6 @@
                         <div>
                             <h4>Direct do Instagram</h4>
                             <p>Acompanhe nossas análises de casos e atualizações técnicas da área.</p>
-                        </div>
-                    </a>
-
-                    <a href="guia-epi.html" target="_blank" class="channel">
-                        <div class="channel__icon" style="background:var(--gold-wash);color:var(--gold-deep)">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
-                        </div>
-                        <div>
-                            <h4>Central Técnica de EPI</h4>
-                            <p>Consulta de Certificados de Aprovação, prazos de troca e materiais de apoio.</p>
                         </div>
                     </a>
                 </div>

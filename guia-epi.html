@@ -50,12 +50,11 @@
 
     <nav class="nav-mobile__panel" id="menuMobilePanel" aria-label="Navegação principal (mobile)">
         <a href="index.html">Página Inicial</a>
-        <a href="guia-epi.html" class="is-active">Central de EPIs</a>
+        <a href="guia-epi.html">Central de EPIs</a>
         <a href="bloco-tecnico.html">Bloco Técnico</a>
         <a href="index.html#download-planilha-premium">Planilha de Gestão de EPIs</a>
-        <a href="index.html#contato">Contato</a>
         <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
-        <a href="index.html#contato" class="btn btn--gold btn--sm">Solicitar Assistência</a>
+        <a href="index.html#contato">Contato</a>
     </nav>
 </header>
 
@@ -374,6 +373,19 @@
 <button type="button" class="scrolltop" id="btnScrollTop" aria-label="Voltar ao topo">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/></svg>
 </button>
+
+<div class="lightbox" id="lightboxGaleria" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxFechar" aria-label="Fechar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>
+    </button>
+    <button class="lightbox__prev" id="lightboxAnterior" aria-label="Foto anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <img class="lightbox__img" id="lightboxImagem" src="" alt="">
+    <button class="lightbox__next" id="lightboxProxima" aria-label="Próxima foto">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+</div>
 
 <script src="main.js"></script>
 <script>
