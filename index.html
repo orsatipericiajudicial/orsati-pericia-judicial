@@ -21,21 +21,6 @@
         <a href="index.html" aria-label="Orsati — página inicial">
             <img class="brand__logo" src="./Images/Orsati Logo pgn.png" alt="Orsati Perícia Judicial">
         </a>
-
-        <div class="disclosure">
-            <button class="disclosure__trigger" type="button" aria-label="Abrir índice técnico" aria-haspopup="true">
-                <span></span><span></span><span></span>
-            </button>
-            <div class="disclosure__panel">
-                <a href="#areas-atuacao">Áreas de Atuação</a>
-                <a href="#qualificacao-tecnica">Acervo Técnico &amp; Currículo</a>
-                <a href="#equipamentos-tecnicos">Equipamentos &amp; Metrologia</a>
-                <a href="#download-planilha-premium">Planilha de Gestão de EPIs</a>
-                <a href="bloco-tecnico.html">Bloco Técnico (Artigos)</a>
-                <hr class="disclosure__sep">
-                <a href="https://caepi.trabalho.gov.br/internet/consultacainternet.aspx" target="_blank" rel="noopener noreferrer">Consultar CA (MTE)</a>
-            </div>
-        </div>
     </div>
 
     <nav class="nav" aria-label="Navegação principal">
@@ -79,7 +64,11 @@
 <main>
 
     <!-- ============================ HERO ============================ -->
-    <section class="hero band--seamless on-dark" id="topo" data-screen-label="Hero">
+    <!-- OPÇÕES DE ALTURA:
+         • Tela cheia SEM as credenciais visíveis → class="hero hero--full ..."
+         • Tela cheia COM as credenciais encaixadas → class="hero hero--fit ..."
+         Basta trocar hero--full por hero--fit (ou vice-versa) na linha abaixo. -->
+    <section class="hero hero--full band--seamless on-dark" id="topo" data-screen-label="Hero">
         <div class="hero__media">
             <video class="hero__video parallax" id="videoHero" autoplay muted loop playsinline poster="./Images/Orsati Foto 15.jpeg">
                 <source src="./Images/VideoFundo.mp4" type="video/mp4">
