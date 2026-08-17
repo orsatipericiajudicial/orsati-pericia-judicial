@@ -444,7 +444,7 @@ a:hover { color: var(--gold-deep); }
     z-index: 10;
     transform: translateY(30px);
     opacity: 0;
-    transition: transform 1s var(--ease), opacity 0.9s var(--ease);
+    transition: transform 0.8s var(--ease), opacity 0.8s var(--ease);
     will-change: transform, opacity;
 }
 .reveal-factbar.is-in {
@@ -468,8 +468,8 @@ a:hover { color: var(--gold-deep); }
     width: 50%;
     background: linear-gradient(135deg, var(--navy-700), var(--navy-800));
     z-index: 10;
-    /* Inicia a abertura das portas após um pequeno delay (0.3s) */
-    transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0.3s;
+    /* O efeito de abertura de placar de TV */
+    transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1) 0.4s;
 }
 .factbar-door--left {
     left: 0;
@@ -487,9 +487,9 @@ a:hover { color: var(--gold-deep); }
 
 .factbar-doors .factbar__grid {
     opacity: 0;
-    transform: scale(0.98);
-    /* Aparece o conteúdo logo em seguida ao movimento das portas */
-    transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s;
+    transform: scale(0.96);
+    /* O conteúdo é revelado assim que as portas começam a abrir */
+    transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
 }
 .reveal-factbar.is-in .factbar-doors .factbar__grid {
     opacity: 1;
@@ -502,6 +502,7 @@ a:hover { color: var(--gold-deep); }
 .factbar__k { display: block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
 .factbar__v { font-family: var(--serif); font-size: var(--step-2); color: var(--white); line-height: 1.25; }
 .factbar__s { display: block; font-size: 0.82rem; color: var(--on-dark-mute); margin-top: 4px; }
+
 /* Credenciais */
 .badge-card {
     padding: 26px 20px; text-align: center; border-radius: var(--radius);
