@@ -90,6 +90,19 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             background-color: #fff;
         }
+
+        @media (max-width: 640px) {
+            body { height: 100vh; height: 100dvh; }
+            .viewer-header { flex-wrap: wrap; gap: 10px; padding: 0.7rem 1rem; }
+            .viewer-brand-box { gap: 0.7rem; }
+            .viewer-logo { max-height: 30px; }
+            .viewer-divider { display: none; }
+            .viewer-header h1 { font-size: 0.98rem; }
+            #ca-subtitle { font-size: 0.76rem !important; }
+            .btn-viewer-back { padding: 0.4rem 0.8rem; font-size: 0.82rem; }
+            .pdf-container { padding: 0.6rem; }
+            iframe { border-radius: 6px; }
+        }
     </style>
 </head>
 <body>

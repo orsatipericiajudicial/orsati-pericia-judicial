@@ -702,7 +702,7 @@ a:hover { color: var(--gold-deep); }
 
 @media (max-width: 992px) {
     .nav { display: none; }
-    .hero__grid, .about, .gate, .contact, .grid--2 { grid-template-columns: 1fr; }
+    .hero__grid, .about, .gate, .contact, .grid--2, .quali-split { grid-template-columns: 1fr !important; }
     .hero { text-align: left; min-height: auto; }
     .about__media { margin-top: 0; order: -1; }
     .frame { max-width: 480px; margin: 0 auto; }
@@ -711,6 +711,7 @@ a:hover { color: var(--gold-deep); }
     .callout__aside { text-align: left; }
     .about__split { grid-template-columns: 1fr; }
     .about__split > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
+    .disclosure { display: none; }
 }
 
 @media (max-width: 768px) {
@@ -914,19 +915,32 @@ header:not(.site-header) nav a:hover { color: var(--gold-deep); }
 }
 .filmstrip__row.is-grabbing { cursor: grabbing; }
 .filmstrip__item { height: 320px; flex-shrink: 0; border-radius: 12px; overflow: hidden; cursor: pointer; }
-.filmstrip__item img { pointer-events: none; transition: transform 0.5s var(--ease); }
+.filmstrip__item img {
+    pointer-events: none; transition: transform 0.5s var(--ease);
+    -webkit-user-drag: none; user-drag: none; -webkit-touch-callout: none;
+}
 .filmstrip__item:hover img { transform: scale(1.04); }
 @media (max-width: 768px) {
     .filmstrip__item { height: 190px; }
     .filmstrip { gap: 10px; }
-    .filmstrip__row { gap: 10px; }
+    /* No celular, troca o arrasto customizado por scroll nativo — muito mais suave no dedo */
+    .filmstrip__row {
+        gap: 10px; width: 100%; cursor: default;
+        overflow-x: auto; overflow-y: hidden;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .filmstrip__row::-webkit-scrollbar { display: none; }
+    .filmstrip__item { scroll-snap-align: start; }
 }
 
-/* Lightbox da galeria */
+/* Lightbox — fundo desfocado, fechamento discreto */
 .lightbox {
     position: fixed; inset: 0; z-index: 2000;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(6, 13, 30, 0.94);
+    background: rgba(6, 13, 30, 0.5);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
     opacity: 0; visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s;
     padding: clamp(16px, 5vw, 40px);
@@ -942,19 +956,19 @@ header:not(.site-header) nav a:hover { color: var(--gold-deep); }
 .lightbox.is-open .lightbox__img { transform: scale(1); }
 .lightbox__close, .lightbox__prev, .lightbox__next {
     position: absolute;
-    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14);
     color: var(--white); border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: var(--transition);
+    cursor: pointer; opacity: 0.7; transition: var(--transition);
 }
-.lightbox__close:hover, .lightbox__prev:hover, .lightbox__next:hover { background: var(--gold); border-color: var(--gold); color: var(--navy-900); }
-.lightbox__close { top: 18px; right: 18px; width: 44px; height: 44px; }
-.lightbox__prev, .lightbox__next { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; }
+.lightbox__close:hover, .lightbox__prev:hover, .lightbox__next:hover { opacity: 1; background: var(--gold); border-color: var(--gold); color: var(--navy-900); }
+.lightbox__close { top: 16px; right: 16px; width: 36px; height: 36px; }
+.lightbox__prev, .lightbox__next { top: 50%; transform: translateY(-50%); width: 50px; height: 50px; }
 .lightbox__prev { left: 18px; }
 .lightbox__next { right: 18px; }
 @media (max-width: 640px) {
     .lightbox__prev, .lightbox__next { width: 40px; height: 40px; }
-    .lightbox__close { width: 36px; height: 36px; top: 10px; right: 10px; }
+    .lightbox__close { width: 32px; height: 32px; top: 10px; right: 10px; }
     .lightbox__prev { left: 8px; }
     .lightbox__next { right: 8px; }
 }

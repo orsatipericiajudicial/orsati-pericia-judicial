@@ -17,6 +17,7 @@
         iniciarTrilha();
         iniciarParallax();
         iniciarGaleria();
+        iniciarImagensClicaveisMobile();
         iniciarFormulario();
         iniciarMenuMobile();
     });
@@ -162,11 +163,79 @@
     }
 
     /* 5. GALERIA (FAIXA DE FOTOS) — parallax + arrasto + lightbox --------- */
+    const MOBILE_MQ = '(max-width: 768px)';
+    function ehMobile() { return window.matchMedia(MOBILE_MQ).matches; }
+
+    /* -- Lightbox compartilhado (galeria + imagens soltas no mobile) -- */
+    const lightboxEl = document.getElementById('lightboxGaleria');
+    const lightboxImg = document.getElementById('lightboxImagem');
+    const lightboxClose = document.getElementById('lightboxFechar');
+    const lightboxPrev = document.getElementById('lightboxAnterior');
+    const lightboxNext = document.getElementById('lightboxProxima');
+    let lbLista = [];
+    let lbIndice = 0;
+
+    function lbAtualizar() {
+        const img = lbLista[lbIndice];
+        if (!img) return;
+        lightboxImg.src = img.currentSrc || img.src;
+        lightboxImg.alt = img.alt || '';
+        const varios = lbLista.length > 1;
+        if (lightboxPrev) lightboxPrev.style.display = varios ? '' : 'none';
+        if (lightboxNext) lightboxNext.style.display = varios ? '' : 'none';
+    }
+    function abrirLightbox(lista, indice) {
+        if (!lightboxEl || !lista || !lista.length) return;
+        lbLista = lista;
+        lbIndice = indice;
+        lbAtualizar();
+        lightboxEl.classList.add('is-open');
+        lightboxEl.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (lightboxClose) lightboxClose.focus();
+    }
+    function fecharLightbox() {
+        if (!lightboxEl) return;
+        lightboxEl.classList.remove('is-open');
+        lightboxEl.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+    function lbIr(delta) {
+        if (!lbLista.length) return;
+        lbIndice = (lbIndice + delta + lbLista.length) % lbLista.length;
+        lbAtualizar();
+    }
+    if (lightboxEl) {
+        if (lightboxClose) lightboxClose.addEventListener('click', fecharLightbox);
+        if (lightboxPrev) lightboxPrev.addEventListener('click', function () { lbIr(-1); });
+        if (lightboxNext) lightboxNext.addEventListener('click', function () { lbIr(1); });
+        lightboxEl.addEventListener('click', function (e) { if (e.target === lightboxEl) fecharLightbox(); });
+        document.addEventListener('keydown', function (e) {
+            if (!lightboxEl.classList.contains('is-open')) return;
+            if (e.key === 'Escape') fecharLightbox();
+            if (e.key === 'ArrowLeft') lbIr(-1);
+            if (e.key === 'ArrowRight') lbIr(1);
+        });
+    }
+
+    /* -- Qualquer imagem de conteúdo, clicável só no mobile -- */
+    function iniciarImagensClicaveisMobile() {
+        document.addEventListener('click', function (e) {
+            if (!ehMobile()) return;
+            const img = e.target.closest('img');
+            if (!img) return;
+            if (img.closest('a')) return; // não interfere em logos/links de navegação
+            if (img.closest('.filmstrip__item')) return; // já tratado pela galeria
+            if (img.closest('.site-header, .nav-mobile__panel, .site-footer, .lightbox')) return;
+            abrirLightbox([img], 0);
+        });
+    }
+
     function iniciarGaleria() {
         const linhas = document.querySelectorAll('.filmstrip__row');
         if (!linhas.length) return;
 
-        // Estado de arrasto manual por linha (soma-se ao parallax de scroll)
+        // Estado de arrasto manual por linha (soma-se ao parallax de scroll) — só desktop
         const estados = new Map();
         linhas.forEach(function (linha) { estados.set(linha, { drag: 0 }); });
 
@@ -195,56 +264,10 @@
         window.addEventListener('resize', moverTodas);
         moverTodas();
 
-        // Todas as fotos, em ordem, para navegação do lightbox
+        // Todas as fotos, em ordem, pra navegação do lightbox
         const todasImagens = Array.prototype.slice.call(document.querySelectorAll('.filmstrip__item img'));
 
-        /* -- Lightbox -- */
-        const lightbox = document.getElementById('lightboxGaleria');
-        const imgLightbox = document.getElementById('lightboxImagem');
-        const btnFechar = document.getElementById('lightboxFechar');
-        const btnAnterior = document.getElementById('lightboxAnterior');
-        const btnProxima = document.getElementById('lightboxProxima');
-        let indiceAtual = 0;
-
-        function atualizarLightbox() {
-            const img = todasImagens[indiceAtual];
-            imgLightbox.src = img.currentSrc || img.src;
-            imgLightbox.alt = img.alt || '';
-        }
-        function abrirLightbox(indice) {
-            if (!lightbox) return;
-            indiceAtual = indice;
-            atualizarLightbox();
-            lightbox.classList.add('is-open');
-            lightbox.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-            if (btnFechar) btnFechar.focus();
-        }
-        function fecharLightbox() {
-            if (!lightbox) return;
-            lightbox.classList.remove('is-open');
-            lightbox.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        }
-        function irPara(delta) {
-            indiceAtual = (indiceAtual + delta + todasImagens.length) % todasImagens.length;
-            atualizarLightbox();
-        }
-
-        if (lightbox && todasImagens.length) {
-            if (btnFechar) btnFechar.addEventListener('click', fecharLightbox);
-            if (btnAnterior) btnAnterior.addEventListener('click', function () { irPara(-1); });
-            if (btnProxima) btnProxima.addEventListener('click', function () { irPara(1); });
-            lightbox.addEventListener('click', function (e) { if (e.target === lightbox) fecharLightbox(); });
-            document.addEventListener('keydown', function (e) {
-                if (!lightbox.classList.contains('is-open')) return;
-                if (e.key === 'Escape') fecharLightbox();
-                if (e.key === 'ArrowLeft') irPara(-1);
-                if (e.key === 'ArrowRight') irPara(1);
-            });
-        }
-
-        /* -- Arrasto (mouse e toque) — não conflita com o clique -- */
+        /* -- Arrasto manual (só desktop — no mobile o scroll nativo cuida) -- */
         linhas.forEach(function (linha) {
             const estado = estados.get(linha);
             let apertado = false;
@@ -253,6 +276,7 @@
             let deslocouBastante = false;
 
             linha.addEventListener('pointerdown', function (e) {
+                if (ehMobile()) return; // deixa o overflow-scroll nativo cuidar no celular
                 if (e.pointerType === 'mouse' && e.button !== 0) return;
                 apertado = true;
                 deslocouBastante = false;
@@ -266,7 +290,6 @@
                 if (!apertado) return;
                 const delta = e.clientX - xInicial;
                 if (Math.abs(delta) > 6) deslocouBastante = true;
-                // Limita o arrasto pra não puxar a faixa toda pra fora da tela
                 const larguraExtra = Math.max(0, linha.scrollWidth - window.innerWidth);
                 const proposto = arrastoInicial + delta;
                 estado.drag = Math.min(60, Math.max(-larguraExtra - 60, proposto));
@@ -286,10 +309,12 @@
 
             linha.addEventListener('click', function (e) {
                 if (deslocouBastante) { e.preventDefault(); return; }
-                const img = e.target.closest('img');
+                const item = e.target.closest('.filmstrip__item');
+                if (!item) return;
+                const img = item.querySelector('img');
                 if (!img) return;
                 const indice = todasImagens.indexOf(img);
-                if (indice > -1) abrirLightbox(indice);
+                if (indice > -1) abrirLightbox(todasImagens, indice);
             });
         });
     }
