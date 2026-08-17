@@ -390,43 +390,29 @@ a:hover { color: var(--gold-deep); }
 .grid--2 { grid-template-columns: repeat(2, 1fr); }
 .stack { display: flex; flex-direction: column; gap: clamp(18px, 2vw, 30px); }
 
-/* Hero */
+/* ==========================================================================
+   HERO (Corrigindo o espaçamento excessivo)
+   ========================================================================== */
 .hero {
     position: relative;
     background: var(--navy-900);
     color: var(--on-dark);
     overflow: hidden;
-    display: grid;
-    align-content: center;
+    display: flex; /* Mudamos de grid para flex para centralizar melhor */
+    align-items: center;
+    /* Reduzimos a altura mínima para descontar o cabeçalho e não sobrar espaço */
+    min-height: calc(100vh - 82px);
+    min-height: calc(100dvh - 82px);
+    padding: clamp(40px, 6vw, 80px) 0;
 }
 .hero::before { display: none; }
-.hero > .wrap { align-self: center; }
+.hero > .wrap { width: 100%; }
 
-/* OPÇÃO A (hero--full) */
-.hero--full {
-    min-height: calc(100vh - 82px); min-height: calc(100dvh - 82px);
-    grid-template-rows: 1fr auto;
-    align-content: center;
-    padding: clamp(32px, 4vw, 56px) 0 clamp(32px, 4vw, 56px);
-}
-.hero--full > .wrap { align-self: center; }
+/* Anulamos as antigas regras que empurravam o conteúdo para baixo */
+.hero--fit, .hero--full { display: contents; }
 
-/* OPÇÃO B (hero--fit) */
-.hero--fit {
-    min-height: 100vh; min-height: 100dvh;
-    grid-template-rows: 1fr auto;
-    padding: clamp(56px, 7vw, 88px) 0 0;
-}
-.hero--fit .hero__lead { margin-bottom: clamp(18px, 2.4vw, 28px); }
-@media (min-height: 900px) {
-    .hero--fit { align-content: center; }
-}
 .hero__media { position: absolute; inset: -8% 0; z-index: 1; pointer-events: none; }
-.hero__video {
-    width: 100%; height: 100%; object-fit: cover;
-    opacity: 0.42;
-    will-change: transform;
-}
+.hero__video { width: 100%; height: 100%; object-fit: cover; opacity: 0.42; will-change: transform; }
 .hero__scrim {
     position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
@@ -451,35 +437,25 @@ a:hover { color: var(--gold-deep); }
 .hero__lead strong { color: var(--white); }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; }
 
-.frame { position: relative; width: 100%; max-width: 440px; justify-self: center; }
-.frame::before {
-    content: ''; position: absolute; top: 16px; right: -16px;
-    width: 100%; height: 100%;
-    border: 2px solid var(--gold); border-radius: 12px;
-}
-.frame--left::before { right: auto; left: -16px; }
-.frame__inner {
-    position: relative; z-index: 2;
-    height: clamp(340px, 42vw, 440px);
-    border-radius: 12px; overflow: hidden;
-    background: var(--navy-700);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: var(--sh-3);
-}
-.frame__inner img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
-/* Factbar Animado (Capacete) */
+/* ==========================================================================
+   FACTBAR (Animação 3D Realista e Placar de TV)
+   ========================================================================== */
 .reveal-factbar {
     position: relative;
     margin-bottom: clamp(40px, 6vw, 68px);
     z-index: 10;
     transform: translateY(30px);
+    opacity: 0;
     transition: transform 1s var(--ease), opacity 0.9s var(--ease);
     will-change: transform, opacity;
+    perspective: 1200px; /* Adicionado para dar profundidade 3D ao capacete */
 }
 .reveal-factbar.is-in {
     transform: translateY(0);
+    opacity: 1;
 }
+
 .factbar-doors {
     position: relative;
     border-radius: 12px;
@@ -488,6 +464,7 @@ a:hover { color: var(--gold-deep); }
     background: var(--navy-900);
     box-shadow: var(--sh-3);
 }
+
 .factbar-door {
     position: absolute;
     top: 0;
@@ -495,7 +472,8 @@ a:hover { color: var(--gold-deep); }
     width: 50%;
     background: linear-gradient(135deg, var(--navy-700), var(--navy-800));
     z-index: 10;
-    transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1) 0.3s;
+    /* Abre em 0.4s (rápido) após 1.7s de espera (tempo do capacete) */
+    transition: transform 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) 1.7s;
 }
 .factbar-door--left {
     left: 0;
@@ -507,50 +485,75 @@ a:hover { color: var(--gold-deep); }
     transform-origin: right;
     border-left: 2px solid var(--gold);
 }
-.reveal-factbar.is-in .factbar-door--left {
-    transform: translateX(-100%);
-}
-.reveal-factbar.is-in .factbar-door--right {
-    transform: translateX(100%);
-}
+
+.reveal-factbar.is-in .factbar-door--left { transform: translateX(-100%); }
+.reveal-factbar.is-in .factbar-door--right { transform: translateX(100%); }
+
 .factbar-icon {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 11;
-    color: var(--gold);
+    z-index: 12;
     background: var(--navy-900);
     padding: 16px;
     border-radius: 50%;
     border: 2px solid var(--gold);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    transition: opacity 0.4s ease 0.1s, transform 0.6s ease;
-}
-.reveal-factbar.is-in .factbar-icon {
+    box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(185, 154, 91, 0.2);
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.4) rotate(90deg);
-    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.5);
+    transform-style: preserve-3d; /* Permite a rotação 3D dos elementos internos */
 }
+
+.reveal-factbar.is-in .factbar-icon {
+    /* O capacete fica 2 segundos em cena fazendo o show */
+    animation: helmet-3d-spin 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* A Mágica do Capacete Girando */
+@keyframes helmet-3d-spin {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotateY(-90deg);
+    }
+    15% { /* Aparece e para de frente rapidinho */
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+    }
+    60% { /* Gira devagar (2 voltas completas) permitindo ver os detalhes */
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1) rotateY(720deg);
+    }
+    85% { /* Dá um giro super rápido finalizando a apresentação */
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2) rotateY(1080deg);
+    }
+    95% { /* Dá um zoom extremo como se batesse na tela */
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3) rotateY(1260deg);
+    }
+    100% { /* Some para revelar os dados */
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3) rotateY(1260deg);
+        visibility: hidden;
+    }
+}
+
 .factbar-doors .factbar__grid {
     opacity: 0;
-    transition: opacity 0.8s ease 0.6s;
+    transform: scale(0.95);
+    /* Aparece logo após a porta abrir (1.8s) */
+    transition: opacity 0.4s ease 1.8s, transform 0.4s ease 1.8s;
 }
 .reveal-factbar.is-in .factbar-doors .factbar__grid {
     opacity: 1;
+    transform: scale(1);
 }
-.factbar__grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1px; background: rgba(255, 255, 255, 0.08);
-}
+
+.factbar__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255, 255, 255, 0.08); }
 .factbar__item { padding: 26px 22px; background: var(--navy-900); }
-.factbar__k {
-    display: block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold-light); margin-bottom: 6px;
-}
+.factbar__k { display: block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
 .factbar__v { font-family: var(--serif); font-size: var(--step-2); color: var(--white); line-height: 1.25; }
 .factbar__s { display: block; font-size: 0.82rem; color: var(--on-dark-mute); margin-top: 4px; }
-
 
 /* Cartão de competência */
 .comp-card { padding: clamp(26px, 3vw, 36px) clamp(22px, 2.4vw, 28px); border-radius: var(--radius); }
